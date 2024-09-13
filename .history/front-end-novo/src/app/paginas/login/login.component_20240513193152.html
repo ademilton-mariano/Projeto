@@ -1,0 +1,132 @@
+<div class="container-login">
+  <div class="container-login-central" *ngIf="!exibirCadastro">
+    <div class="container-header">
+      <div class="titulo-login">
+        Login AdeInvest
+      </div>
+      <div class="info-login">
+        Digite seu email e senha para logar!
+      </div>
+    </div>
+    <div class="container-form">
+      <form class="form-inputs" [formGroup]="formularioLogin" (submit)="Login()">
+        <div class="group-input">
+          <div class="text-info">
+            Data do Login:
+          </div>
+          <input class="input-form" type="date" name="dataLogin" id="dataLogin" placeholder="Data do Login" formControlName="dataLogin" required>
+          <label *ngIf="formularioLogin.get('dataLogin')?.errors?.['required'] &&  formularioLogin.get('dataLogin')?.touched" class="error-input">
+            Campo Obrigatório!
+          </label>
+        </div>
+        <div class="group-input">
+          <div class="text-info">
+            Email:
+          </div>
+          <input class="input-form" type="text" name="email" id="email" placeholder="Email" formControlName="email" required>
+          <label *ngIf="formularioLogin.get('email')?.errors?.['required'] &&  formularioLogin.get('email')?.touched" class="error-input">
+            Campo Obrigatório!
+          </label>
+        </div>
+        <div class="group-input">
+          <div class="text-info">
+            Senha:
+          </div>
+          <input class="input-form" type="password" name="senha" id="senha" placeholder="Senha" formControlName="senha" required>
+          <label *ngIf="formularioLogin.get('senha')?.errors?.['required'] &&  formularioLogin.get('senha')?.touched" class="error-input">
+            Campo Obrigatório!
+          </label>
+        </div>
+        <div class="group-input">
+          <input type="submit" class="btn-login" value="Entrar" [ngClass]="{'disabled' : !formularioLogin.valid}" [disabled]="!formularioLogin.valid">
+        </div>
+        <p>Não tem uma conta? <a style="cursor: pointer; color: blue;" (click)="AbreCadastro()">Cadastre-se</a></p>
+      </form>
+    </div>
+  </div>
+
+  <div class="container-login-central" *ngIf="exibirCadastro">
+    <div class="container-header">
+      <div class="titulo-login">
+        Cadastro AdeInvest
+      </div>
+      <div class="info-login">
+        Preencha os dados para criar sua conta!
+      </div>
+    </div>
+    <div class="container-form">
+      <form class="form-inputs" [formGroup]="formularioCadastro" (submit)="Cadastro()">
+        <div class="group-input">
+          <div class="text-info">
+            Nome:
+          </div>
+          <input class="input-form" type="text" name="nome" id="nome" placeholder="Nome" formControlName="nome" required>
+          <label *ngIf="formularioCadastro.get('nome')?.errors?.['required'] &&  formularioCadastro.get('nome')?.touched" class="error-input">
+            Campo Obrigatório!
+          </label>
+        </div>
+        <div class="group-input">
+          <div class="text-info">
+            Data de Nascimento:
+          </div>
+          <input class="input-form" type="date" name="dataNascimento" id="dataNascimento" placeholder="Data de Nascimento" formControlName="dataNascimento" required>
+          <label *ngIf="formularioCadastro.get('dataNascimento')?.errors?.['required'] &&  formularioCadastro.get('dataNascimento')?.touched" class="error-input">
+            Campo Obrigatório!
+          </label>
+        </div>
+        <div class="group-input">
+          <div class="text-info">
+            CPF:
+          </div>
+          <input class="input-form" type="text" name="cpf" id="cpf" placeholder="CPF" formControlName="cpf" required appCpfMask>
+          <label *ngIf="formularioCadastro.get('cpf')?.errors?.['required'] &&  formularioCadastro.get('cpf')?.touched" class="error-input">
+            Campo Obrigatório!
+          </label>
+        </div>
+        <div class="group-input">
+          <div class="text-info">
+            Email:
+          </div>
+          <input class="input-form" type="text" name="email" id="email" placeholder="Email" formControlName="email" required>
+          <label *ngIf="formularioCadastro.get('email')?.errors?.['required'] &&  formularioCadastro.get('email')?.touched" class="error-input">
+            Campo Obrigatório!
+          </label>
+        </div>
+        <div class="group-input">
+          <div class="text-info">
+            Tipo de Investimento:
+          </div>
+          <select class="input-form" name="tipoInvestimento" id="tipoInvestimento" formControlName="tipoInvestimento" required>
+            <option value="" disabled selected>Selecione um tipo de investimento</option>
+            <option *ngFor="let tipo of tiposInvestimento" [value]="tipo.id">{{ tipo.tipo }}</option>
+          </select>
+        </div>
+        <div class="group-input">
+          <div class="text-info">
+            Valor Inicial do Investimento:
+          </div>
+          <input class="input-form" type="number" name="saldo" id="saldo" placeholder="Valor inicial do investimento" formControlName="saldo" required>
+          <label *ngIf="formularioCadastro.get('saldo')?.errors?.['required'] &&  formularioCadastro.get('saldo')?.touched" class="error-input">
+            Campo Obrigatório!
+          </label>
+        </div>
+        <div class="group-input">
+          <div class="text-info">
+            Senha:
+          </div>
+          <input class="input-form" type="password" name="senha" id="senha" placeholder="Senha" formControlName="senha" required>
+          <label *ngIf="formularioCadastro.get('senha')?.errors?.['required'] &&  formularioCadastro.get('senha')?.touched" class="error-input">
+            Campo Obrigatório!
+          </label>
+        </div>
+        {{ formularioCadastro.errors | json }}
+        <div class="group-input">
+          <input type="submit" class="btn-login" value="Cadastrar" [ngClass]="{'disabled' : !formularioCadastro.valid}" [disabled]="!formularioCadastro.valid">
+        </div>
+        <div class="group-input">
+          <button  class="btn-cancel" (click)="FechaCadastro()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
